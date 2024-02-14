@@ -367,10 +367,16 @@ async function executeTask() {
 }
 
 const checkForShiftEnter = (event: KeyboardEvent) => {
-  if (event.shiftKey && event.key === 'Enter') {
+  //if (event.shiftKey && event.key === 'Enter') {
+  if (!event.shiftKey && event.key === 'Enter') {
+    const input = state.taskDraft.content?.trim(); // Get the input and remove leading/trailing whitespace
+    if (input === '') {
+      // Input is empty
+      return;
+    }
     void executeTask();
     // Prevent a new line from being added to the input (optional)
-    event.preventDefault();
+    //event.preventDefault();
   }
 };
 
